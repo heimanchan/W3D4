@@ -945,3 +945,5 @@ Migrating to CreateResponses (20190124231752)
   [1m[36mResponse Load (0.5ms)[0m  [1m[34mSELECT  "responses".* FROM "responses" WHERE "responses"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
   [1m[36mQuestion Load (0.4ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" INNER JOIN "answerchoices" ON "questions"."id" = "answerchoices"."question_id" WHERE "answerchoices"."id" = $1 LIMIT $2[0m  [["id", 14], ["LIMIT", 1]]
   [1m[35m (0.4ms)[0m  [1m[34mSELECT "responses"."respondent_id" FROM "responses" INNER JOIN "answerchoices" ON "responses"."answer_choice_id" = "answerchoices"."id" WHERE "answerchoices"."question_id" = $1 AND ("responses"."id" != $2)[0m  [["question_id", 27], ["id", 5]]
+  [1m[36mQuestion Load (0.5ms)[0m  [1m[34mSELECT  "questions".* FROM "questions" ORDER BY "questions"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mPoll Load (0.5ms)[0m  [1m[34mSELECT  "polls".* FROM "polls" WHERE "polls"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]

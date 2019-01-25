@@ -11,6 +11,7 @@
 
 class Response < ApplicationRecord
   validates :answer_choice_id, :respondent_id, presence: true
+  validate :respondent_already_answered?, :author_check?
 
   belongs_to :respondent,
     primary_key: :id,
@@ -33,10 +34,14 @@ class Response < ApplicationRecord
 
   def respondent_already_answered?
     response_ids = sibling_responses.pluck(:respondent_id)
-    response_ids.include?(self.respondent_id)
-    
-
+    if response_ids.include?(self.respondent_id)
+      errors[:response] << "can't answer poll twice"
+    end
   end
 
-
+  def author_check?
+    if Question.poll.author_id == self.id
+      errors[:response] << "can't answer own poll"
+    end
+  end
 end
